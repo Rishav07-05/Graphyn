@@ -34,9 +34,11 @@ Example Trace Record:
 }
 */
 
+import { Node, Edge } from "reactflow";
+
 export interface TraceGraph {
-  nodes: Array<{ id: string; data: { label: string; latency: number; status: string } }>;
-  edges: Array<{ id: string; source: string; target: string; label: string }>;
+  nodes: Node[];
+  edges: Edge[];
 }
 
 export interface TraceRecord {
