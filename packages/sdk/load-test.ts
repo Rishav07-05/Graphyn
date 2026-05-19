@@ -1,7 +1,7 @@
 import { createClient } from "./src/index";
 
 const client = createClient({
-  baseUrl: "http://localhost:4000",
+  baseUrl: "http://localhost:3000",
   apiKey: "graphyn_demo_key"
 });
 
