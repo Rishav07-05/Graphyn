@@ -11,10 +11,12 @@ const start = async () => {
   initSocket(server);
 
   app.get("/", (req, res) => {
-    res.json({ status: "ok" });
-    console.log("Server is UPPPP !!!")
-  })
-  
+    res.json({
+      status: "ok",
+      service: "Graphyn"
+    });
+  });
+
   server.listen(env.port, () => {
     // eslint-disable-next-line no-console
     console.log(`Graphyn server running on port ${env.port}`);
