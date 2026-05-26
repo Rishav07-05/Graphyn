@@ -11,13 +11,14 @@ export const ChartCard = ({ title, subtitle, children }: PropsWithChildren<Chart
     <GlassPanel>
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-sm font-semibold text-slate-900 dark:text-white">{title}</div>
+          <div className="text-sm font-semibold" style={{ color: 'var(--accent)' }}>{title}</div>
           {subtitle ? (
-            <div className="text-xs text-slate-500 dark:text-slate-400">{subtitle}</div>
+            <div className="text-[11px] font-mono mt-0.5" style={{ color: 'var(--text-faint)' }}>{subtitle}</div>
           ) : null}
         </div>
+        <div className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: 'var(--pulse-dot)' }} />
       </div>
-      <div className="mt-6 h-56">{children}</div>
+      <div className="mt-5 h-56">{children}</div>
     </GlassPanel>
   );
 };

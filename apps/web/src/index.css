@@ -1,32 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme Variables ───────────────────────────────── */
 :root {
   color-scheme: light;
+
+  --bg-base: #f5f5f0;
+  --bg-surface: #eaeae5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8f8f5;
+  --bg-sidebar: #eaeae5;
+
+  --text-heading: #1b3a1b;
+  --text-body: #2d4a2d;
+  --text-muted: #6b836b;
+  --text-faint: #9aab9a;
+
+  --accent: #3a7d3a;
+  --accent-secondary: #4a9a4a;
+  --accent-bg: rgba(58, 125, 58, 0.08);
+  --accent-bg-hover: rgba(58, 125, 58, 0.14);
+  --accent-border: rgba(58, 125, 58, 0.18);
+
+  --border: rgba(40, 70, 40, 0.1);
+  --border-hover: rgba(40, 70, 40, 0.2);
+
+  --badge-success-bg: rgba(58, 125, 58, 0.1);
+  --badge-success-text: #2d6a2d;
+  --badge-success-border: rgba(58, 125, 58, 0.2);
+  --badge-error-bg: rgba(220, 60, 60, 0.08);
+  --badge-error-text: #c43c3c;
+  --badge-error-border: rgba(220, 60, 60, 0.2);
+
+  --chart-stroke: #3a7d3a;
+  --chart-fill-start: rgba(58, 125, 58, 0.2);
+  --chart-fill-end: rgba(58, 125, 58, 0);
+  --chart-grid: rgba(40, 70, 40, 0.06);
+
+  --glow: rgba(58, 125, 58, 0.08);
+  --scrollbar: rgba(58, 125, 58, 0.15);
+  --scrollbar-hover: rgba(58, 125, 58, 0.25);
+  --selection-bg: rgba(58, 125, 58, 0.15);
+  --selection-text: #1b3a1b;
+
+  --pulse-dot: #3a7d3a;
 }
 
 .dark {
   color-scheme: dark;
+
+  --bg-base: #050505;
+  --bg-surface: #0d0d0d;
+  --bg-card: #0a0a0a;
+  --bg-card-hover: #111111;
+  --bg-sidebar: #0a0a0a;
+
+  --text-heading: #d9ed92;
+  --text-body: #d8f3dc;
+  --text-muted: rgba(216, 243, 220, 0.4);
+  --text-faint: rgba(216, 243, 220, 0.2);
+
+  --accent: #d9ed92;
+  --accent-secondary: #d8f3dc;
+  --accent-bg: rgba(217, 237, 146, 0.05);
+  --accent-bg-hover: rgba(217, 237, 146, 0.1);
+  --accent-border: rgba(217, 237, 146, 0.15);
+
+  --border: rgba(217, 237, 146, 0.08);
+  --border-hover: rgba(217, 237, 146, 0.18);
+
+  --badge-success-bg: rgba(217, 237, 146, 0.1);
+  --badge-success-text: #d9ed92;
+  --badge-success-border: rgba(217, 237, 146, 0.2);
+  --badge-error-bg: rgba(239, 68, 68, 0.1);
+  --badge-error-text: #f87171;
+  --badge-error-border: rgba(239, 68, 68, 0.2);
+
+  --chart-stroke: #d9ed92;
+  --chart-fill-start: rgba(217, 237, 146, 0.3);
+  --chart-fill-end: rgba(217, 237, 146, 0);
+  --chart-grid: rgba(216, 243, 220, 0.05);
+
+  --glow: rgba(217, 237, 146, 0.03);
+  --scrollbar: rgba(217, 237, 146, 0.15);
+  --scrollbar-hover: rgba(217, 237, 146, 0.25);
+  --selection-bg: rgba(217, 237, 146, 0.2);
+  --selection-text: #d9ed92;
+
+  --pulse-dot: #d9ed92;
+}
+
+/* ── Global Styles ─────────────────────────────────── */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: "Manrope", "Segoe UI", sans-serif;
-  background-color: #f8fafc;
-  color: #0f172a;
-  transition: background-color 220ms ease, color 220ms ease;
+  font-family: "Inter", "Manrope", "Segoe UI", sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-body);
+  transition: background-color 250ms ease, color 250ms ease;
 }
 
-.dark body {
-  background-color: #0b1220;
-  color: #ffffff;
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
 
-.glass {
-  backdrop-filter: blur(18px);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.dark .glass {
-  background: rgba(15, 23, 42, 0.55);
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-text);
 }

@@ -48,14 +48,49 @@ export const getTraceById = async (projectId: string, traceId: string) => {
 };
 
 export const buildTraceGraph = (trace: { traceId: string; spans: any[] }) => {
-  const nodes = trace.spans.map((span) => ({
+  const spanById = new Map(trace.spans.map((span) => [span.spanId, span]));
+  const depthCache = new Map<string, number>();
+
+  const getDepth = (spanId: string): number => {
+    if (depthCache.has(spanId)) {
+      return depthCache.get(spanId) ?? 0;
+    }
+    const span = spanById.get(spanId);
+    if (!span || !span.parentSpanId) {
+      depthCache.set(spanId, 0);
+      return 0;
+    }
+    const depth = getDepth(span.parentSpanId) + 1;
+    depthCache.set(spanId, depth);
+    return depth;
+  };
+
+  const depthBuckets = new Map<number, any[]>();
+  trace.spans.forEach((span) => {
+    const depth = getDepth(span.spanId);
+    const bucket = depthBuckets.get(depth) ?? [];
+    bucket.push(span);
+    depthBuckets.set(depth, bucket);
+  });
+
+  const nodes = trace.spans.map((span) => {
+    const depth = getDepth(span.spanId);
+    const bucket = depthBuckets.get(depth) ?? [];
+    const index = bucket.findIndex((item) => item.spanId === span.spanId);
+
+    return {
     id: span.spanId,
     data: {
       label: span.service.name,
       latency: span.metrics.latency,
       status: span.status
+    },
+    position: {
+      x: depth * 240,
+      y: index * 90
     }
-  }));
+    };
+  });
 
   const edges = trace.spans
     .filter((span) => span.parentSpanId)

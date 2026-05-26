@@ -15,12 +15,12 @@ export const AppShell = () => {
   useProjectData(projectId);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white">
+    <div className="min-h-screen transition-colors duration-300" style={{ backgroundColor: 'var(--bg-base)', color: 'var(--text-body)' }}>
       <div className="flex">
         <Sidebar />
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <Topbar />
-          <main className="px-8 py-6">
+          <main className="px-6 py-6 lg:px-8">
             <Outlet context={{ projectId } as AppShellContext} />
           </main>
         </div>

@@ -7,9 +7,14 @@ export const ThemeToggle = () => {
     <button
       type="button"
       onClick={toggle}
-      className="rounded-full border border-slate-200/80 bg-slate-100 px-4 py-2 text-xs uppercase tracking-wide text-slate-800 dark:border-white/10 dark:bg-white/5 dark:text-white"
+      className="rounded-full px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] backdrop-blur-sm transition-all duration-300"
+      style={{
+        backgroundColor: 'var(--accent-bg)',
+        color: 'var(--accent)',
+        border: '1px solid var(--accent-border)',
+      }}
     >
-      {mode === "dark" ? "Light" : "Dark"} Mode
+      {mode === "dark" ? "☀️ Light" : "🌙 Dark"}
     </button>
   );
 };

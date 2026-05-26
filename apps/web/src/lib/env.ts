@@ -1,11 +1,12 @@
 export const env = {
   apiBaseUrl: (
-    import.meta.env.VITE_API_BASE_URL ??
+    import.meta.env.VITE_API_BASE_URL ||
     "http://localhost:4000"
   ).replace(/\/$/, ""),
 
   socketUrl: (
-    import.meta.env.VITE_SOCKET_URL ??
+    import.meta.env.VITE_SOCKET_URL ||
+    import.meta.env.VITE_API_BASE_URL ||
     "http://localhost:4000"
   ).replace(/\/$/, ""),
 

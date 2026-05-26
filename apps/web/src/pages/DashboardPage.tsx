@@ -3,6 +3,10 @@ import { MetricCard } from "../components/MetricCard";
 import { ChartCard } from "../components/ChartCard";
 import { LiveTrafficGraph } from "../graphs/LiveTrafficGraph";
 import { EventFeed } from "../components/EventFeed";
+import { motion } from "framer-motion";
+
+const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } } };
+const rise = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
 
 export const DashboardPage = () => {
   const metrics = useAppStore((state) => state.metrics);
@@ -17,30 +21,60 @@ export const DashboardPage = () => {
   const activeServices = services.length;
 
   return (
-    <div className="space-y-8">
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-6">
-        <MetricCard label="Requests / min" value={`${requests}`} detail="Live throughput" />
-        <MetricCard label="Avg Latency" value={`${latency}ms`} detail="Across services" />
-        <MetricCard label="p95 Latency" value={`${p95}ms`} detail="Performance tail" />
-        <MetricCard label="Errors" value={`${errors}`} detail="Current window" />
-        <MetricCard label="Active Services" value={`${activeServices}`} detail="Reporting now" />
-        <MetricCard
-          label="Websocket Activity"
-          value={`${socketConnections}`}
-          detail="Active connections"
-        />
-      </div>
+    <motion.div variants={stagger} initial="hidden" animate="visible" className="space-y-6">
+      {/* Page header */}
+      <motion.div variants={rise} className="flex items-end justify-between">
+        <div>
+          <h1 className="text-xl font-bold text-[#d9ed92]">Dashboard</h1>
+          <p className="text-[11px] text-[#d8f3dc]/30 font-mono mt-1">Real-time system overview</p>
+        </div>
+        <div className="text-[10px] text-[#d8f3dc]/20 font-mono uppercase tracking-wider">
+          Last updated: {new Date().toLocaleTimeString()}
+        </div>
+      </motion.div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <ChartCard title="Realtime Latency" subtitle="Websocket stream">
+      {/* Metric cards */}
+      <motion.div variants={stagger} className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+        <motion.div variants={rise}><MetricCard label="Requests / min" value={`${requests}`} detail="Live throughput" /></motion.div>
+        <motion.div variants={rise}><MetricCard label="Avg Latency" value={`${latency}ms`} detail="Across services" /></motion.div>
+        <motion.div variants={rise}><MetricCard label="p95 Latency" value={`${p95}ms`} detail="Performance tail" /></motion.div>
+        <motion.div variants={rise}><MetricCard label="Errors" value={`${errors}`} detail="Current window" /></motion.div>
+        <motion.div variants={rise}><MetricCard label="Services" value={`${activeServices}`} detail="Reporting now" /></motion.div>
+        <motion.div variants={rise}><MetricCard label="WS Connections" value={`${socketConnections}`} detail="Active sockets" /></motion.div>
+      </motion.div>
+
+      {/* Charts */}
+      <motion.div variants={rise} className="grid gap-5 lg:grid-cols-[1.3fr_0.7fr]">
+        <ChartCard title="Realtime Latency" subtitle="websocket stream">
           <LiveTrafficGraph events={traffic} />
         </ChartCard>
-        <ChartCard title="Live Event Feed" subtitle="Most recent spans">
-          <div className="h-56 overflow-y-auto">
+        <ChartCard title="Live Event Feed" subtitle="most recent spans">
+          <div className="h-56 overflow-y-auto pr-1 custom-scrollbar">
             <EventFeed />
           </div>
         </ChartCard>
-      </div>
-    </div>
+      </motion.div>
+
+      {/* Service quick-status */}
+      {services.length > 0 && (
+        <motion.div variants={rise}>
+          <div className="text-[11px] uppercase tracking-[0.15em] text-[#d9ed92]/40 font-mono mb-3">Active Services</div>
+          <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {services.map((svc) => (
+              <div key={svc.serviceId} className="rounded-xl border border-[#d8f3dc]/6 bg-[#0a0a0a] p-4 transition-all hover:border-[#d9ed92]/15">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`h-1.5 w-1.5 rounded-full ${svc.errorCount > 5 ? "bg-red-400" : "bg-[#d9ed92]"}`} />
+                  <span className="text-[13px] font-medium text-[#d8f3dc] truncate">{svc.name}</span>
+                </div>
+                <div className="flex items-center gap-4 text-[10px] font-mono text-[#d8f3dc]/30">
+                  <span>{svc.avgLatency}ms avg</span>
+                  <span>{svc.requestCount} req</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </motion.div>
   );
 };

@@ -16,7 +16,11 @@ export default {
           mist: "#e7eefb",
           cyan: "#4af0e5",
           emerald: "#35f1a4",
-          ember: "#f97316"
+          ember: "#f97316",
+          lime: "#d9ed92",
+          mint: "#d8f3dc",
+          void: "#050505",
+          abyss: "#0a0a0a"
         }
       },
       boxShadow: {
