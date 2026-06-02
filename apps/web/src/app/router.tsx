@@ -13,6 +13,7 @@ import { LogsPage } from "../pages/LogsPage";
 import { AlertsPage } from "../pages/AlertsPage";
 import { SettingsPage } from "../pages/SettingsPage";
 import { SdkDocsPage } from "../pages/SdkDocsPage";
+import { ControlCenterPage } from "../pages/control-center";
 
 const ProtectedApp = () => (
   <>
@@ -56,7 +57,8 @@ export const router = createBrowserRouter([
       { path: "logs", element: <LogsPage /> },
       { path: "alerts", element: <AlertsPage /> },
       { path: "settings", element: <SettingsPage /> },
-      { path: "sdk", element: <SdkDocsPage /> }
+      { path: "sdk", element: <SdkDocsPage /> },
+      { path: "control-center", element: <ControlCenterPage /> }
     ]
   }
 ]);

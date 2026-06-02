@@ -1,15 +1,34 @@
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
 import { useRealtime } from "../hooks/useRealtime";
 import { useProjectData } from "../hooks/useProjectData";
+import { useControlCenterStore } from "../store/useControlCenterStore";
+import { useAuth } from "@clerk/clerk-react";
 
 export interface AppShellContext {
   projectId: string;
 }
 
 export const AppShell = () => {
-  const projectId = "default";
+  const { getToken } = useAuth();
+  const selectedProjectId = useControlCenterStore((state) => state.selectedProjectId);
+  const fetchProjects = useControlCenterStore((state) => state.fetchProjects);
+  const projectId = selectedProjectId ?? "default";
+
+  // Sync projects with server database on-mount
+  useEffect(() => {
+    const syncDb = async () => {
+      try {
+        const token = await getToken();
+        await fetchProjects(token ?? undefined);
+      } catch (err) {
+        console.error("Failed to sync project database", err);
+      }
+    };
+    syncDb();
+  }, [getToken, fetchProjects]);
 
   useRealtime();
   useProjectData(projectId);

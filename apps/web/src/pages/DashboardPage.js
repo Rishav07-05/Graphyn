@@ -1,0 +1,21 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useAppStore } from "../store/useAppStore";
+import { MetricCard } from "../components/MetricCard";
+import { ChartCard } from "../components/ChartCard";
+import { LiveTrafficGraph } from "../graphs/LiveTrafficGraph";
+import { EventFeed } from "../components/EventFeed";
+import { motion } from "framer-motion";
+const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.06 } } };
+const rise = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
+export const DashboardPage = () => {
+    const metrics = useAppStore((state) => state.metrics);
+    const traffic = useAppStore((state) => state.traffic);
+    const services = useAppStore((state) => state.services);
+    const socketConnections = useAppStore((state) => state.socketConnections);
+    const requests = metrics?.requestCount ?? 0;
+    const latency = metrics?.avgLatency ?? 0;
+    const errors = metrics?.errorCount ?? 0;
+    const p95 = metrics?.p95Latency ?? 0;
+    const activeServices = services.length;
+    return (_jsxs(motion.div, { variants: stagger, initial: "hidden", animate: "visible", className: "space-y-6", children: [_jsxs(motion.div, { variants: rise, className: "flex items-end justify-between", children: [_jsxs("div", { children: [_jsx("h1", { className: "text-xl font-bold text-[#d9ed92]", children: "Dashboard" }), _jsx("p", { className: "text-[11px] text-[#d8f3dc]/30 font-mono mt-1", children: "Real-time system overview" })] }), _jsxs("div", { className: "text-[10px] text-[#d8f3dc]/20 font-mono uppercase tracking-wider", children: ["Last updated: ", new Date().toLocaleTimeString()] })] }), _jsxs(motion.div, { variants: stagger, className: "grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-6", children: [_jsx(motion.div, { variants: rise, children: _jsx(MetricCard, { label: "Requests / min", value: `${requests}`, detail: "Live throughput" }) }), _jsx(motion.div, { variants: rise, children: _jsx(MetricCard, { label: "Avg Latency", value: `${latency}ms`, detail: "Across services" }) }), _jsx(motion.div, { variants: rise, children: _jsx(MetricCard, { label: "p95 Latency", value: `${p95}ms`, detail: "Performance tail" }) }), _jsx(motion.div, { variants: rise, children: _jsx(MetricCard, { label: "Errors", value: `${errors}`, detail: "Current window" }) }), _jsx(motion.div, { variants: rise, children: _jsx(MetricCard, { label: "Services", value: `${activeServices}`, detail: "Reporting now" }) }), _jsx(motion.div, { variants: rise, children: _jsx(MetricCard, { label: "WS Connections", value: `${socketConnections}`, detail: "Active sockets" }) })] }), _jsxs(motion.div, { variants: rise, className: "grid gap-5 lg:grid-cols-[1.3fr_0.7fr]", children: [_jsx(ChartCard, { title: "Realtime Latency", subtitle: "websocket stream", children: _jsx(LiveTrafficGraph, { events: traffic }) }), _jsx(ChartCard, { title: "Live Event Feed", subtitle: "most recent spans", children: _jsx("div", { className: "h-56 overflow-y-auto pr-1 custom-scrollbar", children: _jsx(EventFeed, {}) }) })] }), services.length > 0 && (_jsxs(motion.div, { variants: rise, children: [_jsx("div", { className: "text-[11px] uppercase tracking-[0.15em] text-[#d9ed92]/40 font-mono mb-3", children: "Active Services" }), _jsx("div", { className: "grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4", children: services.map((svc) => (_jsxs("div", { className: "rounded-xl border border-[#d8f3dc]/6 bg-[#0a0a0a] p-4 transition-all hover:border-[#d9ed92]/15", children: [_jsxs("div", { className: "flex items-center gap-2 mb-2", children: [_jsx("span", { className: `h-1.5 w-1.5 rounded-full ${svc.errorCount > 5 ? "bg-red-400" : "bg-[#d9ed92]"}` }), _jsx("span", { className: "text-[13px] font-medium text-[#d8f3dc] truncate", children: svc.name })] }), _jsxs("div", { className: "flex items-center gap-4 text-[10px] font-mono text-[#d8f3dc]/30", children: [_jsxs("span", { children: [svc.avgLatency, "ms avg"] }), _jsxs("span", { children: [svc.requestCount, " req"] })] })] }, svc.serviceId))) })] }))] }));
+};

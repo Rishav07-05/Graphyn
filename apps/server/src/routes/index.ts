@@ -6,6 +6,7 @@ import { analyticsRoutes } from "./analytics";
 import { logsRoutes } from "./logs";
 import { alertsRoutes } from "./alerts";
 import { analysisRoutes } from "./analysis";
+import { projectsRoutes } from "./projects";
 
 export const apiRoutes = Router();
 
@@ -16,3 +17,4 @@ apiRoutes.use("/analytics", analyticsRoutes);
 apiRoutes.use("/logs", logsRoutes);
 apiRoutes.use("/alerts", alertsRoutes);
 apiRoutes.use("/analysis", analysisRoutes);
+apiRoutes.use("/projects", projectsRoutes);
