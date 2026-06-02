@@ -26,13 +26,24 @@ export const useProjectData = (projectId) => {
                 fetchAnalytics(projectId, authToken ?? undefined),
                 fetchAnalysis(projectId, authToken ?? undefined)
             ]);
-            setServices(services);
-            setTraces(traces);
-            setAlerts(alerts);
-            setLogs(logs);
-            setAnalytics(analytics);
-            if (analytics[0]) {
-                setMetrics(analytics[0]);
+            const currentStore = useAppStore.getState();
+            if (services && (services.length > 0 || currentStore.services.length === 0)) {
+                setServices(services);
+            }
+            if (traces && (traces.length > 0 || currentStore.traces.length === 0)) {
+                setTraces(traces);
+            }
+            if (alerts && (alerts.length > 0 || currentStore.alerts.length === 0)) {
+                setAlerts(alerts);
+            }
+            if (logs && (logs.length > 0 || currentStore.logs.length === 0)) {
+                setLogs(logs);
+            }
+            if (analytics && (analytics.length > 0 || currentStore.analytics.length === 0)) {
+                setAnalytics(analytics);
+                if (analytics[0]) {
+                    setMetrics(analytics[0]);
+                }
             }
             setAnalysis(analysisResult);
         };
