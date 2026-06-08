@@ -5,5 +5,7 @@ export const ThroughputChart = ({ data }) => {
         time: point.bucket ?? "",
         throughput: point.throughput
     }));
-    return (_jsx(ResponsiveContainer, { width: "100%", height: "100%", children: _jsxs(AreaChart, { data: chartData, children: [_jsx(XAxis, { dataKey: "time", hide: true }), _jsx(YAxis, { hide: true }), _jsx(Tooltip, {}), _jsx(Area, { type: "monotone", dataKey: "throughput", stroke: "#4af0e5", fill: "#4af0e533" })] }) }));
+    const root = typeof document !== 'undefined' ? getComputedStyle(document.documentElement) : null;
+    const strokeColor = root?.getPropertyValue('--accent-secondary').trim() || '#E0F7FA';
+    return (_jsx(ResponsiveContainer, { width: "100%", height: "100%", children: _jsxs(AreaChart, { data: chartData, children: [_jsx(XAxis, { dataKey: "time", hide: true }), _jsx(YAxis, { hide: true }), _jsx(Tooltip, {}), _jsx(Area, { type: "monotone", dataKey: "throughput", stroke: strokeColor, fill: strokeColor, fillOpacity: 0.12 })] }) }));
 };

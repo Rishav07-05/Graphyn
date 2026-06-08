@@ -11,13 +11,16 @@ export const RequestVolumeChart = ({ data }: RequestVolumeChartProps) => {
     requests: point.requestCount
   }));
 
+  const root = typeof document !== 'undefined' ? getComputedStyle(document.documentElement) : null;
+  const fillColor = root?.getPropertyValue('--accent-secondary').trim() || '#E0F7FA';
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart data={chartData}>
         <XAxis dataKey="time" hide />
         <YAxis hide />
         <Tooltip />
-        <Bar dataKey="requests" fill="#4af0e5" />
+        <Bar dataKey="requests" fill={fillColor} radius={[2, 2, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );

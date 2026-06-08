@@ -40,10 +40,10 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
             key={toast.id}
             className={`pointer-events-auto rounded-xl border px-4 py-3 text-sm shadow-lg ${
               toast.type === "success"
-                ? "border-emerald-200/70 bg-emerald-500/10 text-emerald-700 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200"
+                ? "border-[var(--badge-success-border)] bg-[var(--badge-success-bg)] text-[var(--badge-success-text)]"
                 : toast.type === "error"
-                  ? "border-red-200/70 bg-red-500/10 text-red-700 dark:border-red-400/30 dark:bg-red-400/10 dark:text-red-200"
-                  : "border-slate-200/70 bg-white/90 text-slate-700 dark:border-white/10 dark:bg-slate-950/80 dark:text-slate-200"
+                  ? "border-[var(--badge-error-border)] bg-[var(--badge-error-bg)] text-[var(--badge-error-text)]"
+                  : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-body)]"
             }`}
           >
             {toast.message}

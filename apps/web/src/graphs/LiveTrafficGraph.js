@@ -14,9 +14,9 @@ export const LiveTrafficGraph = ({ events }) => {
     }));
     /* Read CSS variable values at render time for recharts (which needs raw color strings) */
     const root = typeof document !== 'undefined' ? getComputedStyle(document.documentElement) : null;
-    const strokeColor = root?.getPropertyValue('--chart-stroke').trim() || '#d9ed92';
-    const gridColor = root?.getPropertyValue('--chart-grid').trim() || 'rgba(216,243,220,0.05)';
-    const fillStart = root?.getPropertyValue('--chart-fill-start').trim() || 'rgba(217,237,146,0.3)';
-    const fillEnd = root?.getPropertyValue('--chart-fill-end').trim() || 'rgba(217,237,146,0)';
+    const strokeColor = root?.getPropertyValue('--chart-stroke').trim() || '#FF6B35';
+    const gridColor = root?.getPropertyValue('--chart-grid').trim() || 'rgba(255,255,255,0.03)';
+    const fillStart = root?.getPropertyValue('--chart-fill-start').trim() || 'rgba(255,107,53,0.15)';
+    const fillEnd = root?.getPropertyValue('--chart-fill-end').trim() || 'rgba(255,107,53,0)';
     return (_jsx(ResponsiveContainer, { width: "100%", height: "100%", children: _jsxs(AreaChart, { data: data, children: [_jsx("defs", { children: _jsxs("linearGradient", { id: "latencyGrad", x1: "0", y1: "0", x2: "0", y2: "1", children: [_jsx("stop", { offset: "0%", stopColor: fillStart, stopOpacity: 1 }), _jsx("stop", { offset: "100%", stopColor: fillEnd, stopOpacity: 1 })] }) }), _jsx(CartesianGrid, { strokeDasharray: "3 3", stroke: gridColor }), _jsx(XAxis, { dataKey: "time", hide: true }), _jsx(YAxis, { hide: true }), _jsx(Tooltip, { content: _jsx(CustomTooltip, {}) }), _jsx(Area, { type: "monotone", dataKey: "latency", stroke: strokeColor, strokeWidth: 2, fill: "url(#latencyGrad)", dot: false, animationDuration: 300 })] }) }));
 };

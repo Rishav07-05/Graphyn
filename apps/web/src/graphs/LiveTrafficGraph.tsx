@@ -29,10 +29,10 @@ export const LiveTrafficGraph = ({ events }: LiveTrafficGraphProps) => {
 
   /* Read CSS variable values at render time for recharts (which needs raw color strings) */
   const root = typeof document !== 'undefined' ? getComputedStyle(document.documentElement) : null;
-  const strokeColor = root?.getPropertyValue('--chart-stroke').trim() || '#d9ed92';
-  const gridColor = root?.getPropertyValue('--chart-grid').trim() || 'rgba(216,243,220,0.05)';
-  const fillStart = root?.getPropertyValue('--chart-fill-start').trim() || 'rgba(217,237,146,0.3)';
-  const fillEnd = root?.getPropertyValue('--chart-fill-end').trim() || 'rgba(217,237,146,0)';
+  const strokeColor = root?.getPropertyValue('--chart-stroke').trim() || '#FF6B35';
+  const gridColor = root?.getPropertyValue('--chart-grid').trim() || 'rgba(255,255,255,0.03)';
+  const fillStart = root?.getPropertyValue('--chart-fill-start').trim() || 'rgba(255,107,53,0.15)';
+  const fillEnd = root?.getPropertyValue('--chart-fill-end').trim() || 'rgba(255,107,53,0)';
 
   return (
     <ResponsiveContainer width="100%" height="100%">

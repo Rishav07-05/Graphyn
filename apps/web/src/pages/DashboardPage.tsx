@@ -25,10 +25,10 @@ export const DashboardPage = () => {
       {/* Page header */}
       <motion.div variants={rise} className="flex items-end justify-between">
         <div>
-          <h1 className="text-xl font-bold text-[#d9ed92]">Dashboard</h1>
-          <p className="text-[11px] text-[#d8f3dc]/30 font-mono mt-1">Real-time system overview</p>
+          <h1 className="text-xl font-bold tracking-tight" style={{ color: 'var(--text-heading)' }}>Dashboard</h1>
+          <p className="text-[10px] uppercase tracking-wider font-mono mt-1" style={{ color: 'var(--text-muted)' }}>Real-time system overview</p>
         </div>
-        <div className="text-[10px] text-[#d8f3dc]/20 font-mono uppercase tracking-wider">
+        <div className="text-[9px] font-mono uppercase tracking-wider" style={{ color: 'var(--text-faint)' }}>
           Last updated: {new Date().toLocaleTimeString()}
         </div>
       </motion.div>
@@ -58,15 +58,28 @@ export const DashboardPage = () => {
       {/* Service quick-status */}
       {services.length > 0 && (
         <motion.div variants={rise}>
-          <div className="text-[11px] uppercase tracking-[0.15em] text-[#d9ed92]/40 font-mono mb-3">Active Services</div>
+          <div className="text-[10px] uppercase tracking-[0.2em] font-mono mb-3" style={{ color: 'var(--text-muted)' }}>Active Services</div>
           <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {services.map((svc) => (
-              <div key={svc.serviceId} className="rounded-xl border border-[#d8f3dc]/6 bg-[#0a0a0a] p-4 transition-all hover:border-[#d9ed92]/15">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className={`h-1.5 w-1.5 rounded-full ${svc.errorCount > 5 ? "bg-red-400" : "bg-[#d9ed92]"}`} />
-                  <span className="text-[13px] font-medium text-[#d8f3dc] truncate">{svc.name}</span>
+              <div
+                key={svc.serviceId}
+                className="rounded-xl border p-4 transition-all duration-300 hover:shadow-[0_0_20px_var(--glow)]"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  borderColor: 'var(--border)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--border-hover)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--border)';
+                }}
+              >
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <span className={`h-1.5 w-1.5 rounded-full ${svc.errorCount > 5 ? "bg-brand-primary" : "bg-brand-secondary"}`} />
+                  <span className="text-[12px] font-semibold truncate" style={{ color: 'var(--text-heading)' }}>{svc.name}</span>
                 </div>
-                <div className="flex items-center gap-4 text-[10px] font-mono text-[#d8f3dc]/30">
+                <div className="flex items-center gap-4 text-[9px] font-mono" style={{ color: 'var(--text-muted)' }}>
                   <span>{svc.avgLatency}ms avg</span>
                   <span>{svc.requestCount} req</span>
                 </div>

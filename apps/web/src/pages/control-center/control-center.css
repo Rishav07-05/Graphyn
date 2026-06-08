@@ -257,9 +257,9 @@
   animation: cc-slideUp 0.25s ease;
 }
 .cc-modal-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--accent);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-heading);
   margin-bottom: 20px;
 }
 
@@ -475,13 +475,14 @@
 
 /* ── Section Headers ───────────────────────────────────── */
 .cc-section-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--accent);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
   margin-bottom: 4px;
 }
 .cc-section-desc {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   margin-bottom: 20px;
 }

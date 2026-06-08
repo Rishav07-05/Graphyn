@@ -5,5 +5,7 @@ export const ErrorRateChart = ({ data }) => {
         time: point.bucket ?? "",
         errors: point.errorCount
     }));
-    return (_jsx(ResponsiveContainer, { width: "100%", height: "100%", children: _jsxs(LineChart, { data: chartData, children: [_jsx(XAxis, { dataKey: "time", hide: true }), _jsx(YAxis, { hide: true }), _jsx(Tooltip, {}), _jsx(Line, { type: "monotone", dataKey: "errors", stroke: "#f97316", strokeWidth: 2, dot: false })] }) }));
+    const root = typeof document !== 'undefined' ? getComputedStyle(document.documentElement) : null;
+    const strokeColor = root?.getPropertyValue('--accent').trim() || '#FF6B35';
+    return (_jsx(ResponsiveContainer, { width: "100%", height: "100%", children: _jsxs(LineChart, { data: chartData, children: [_jsx(XAxis, { dataKey: "time", hide: true }), _jsx(YAxis, { hide: true }), _jsx(Tooltip, {}), _jsx(Line, { type: "monotone", dataKey: "errors", stroke: strokeColor, strokeWidth: 2, dot: false })] }) }));
 };

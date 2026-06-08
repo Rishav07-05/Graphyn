@@ -11,13 +11,16 @@ export const LatencyTrendChart = ({ data }: LatencyTrendChartProps) => {
     latency: point.avgLatency
   }));
 
+  const root = typeof document !== 'undefined' ? getComputedStyle(document.documentElement) : null;
+  const strokeColor = root?.getPropertyValue('--accent-secondary').trim() || '#E0F7FA';
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={chartData}>
         <XAxis dataKey="time" hide />
         <YAxis hide />
         <Tooltip />
-        <Line type="monotone" dataKey="latency" stroke="#35f1a4" strokeWidth={2} dot={false} />
+        <Line type="monotone" dataKey="latency" stroke={strokeColor} strokeWidth={2} dot={false} />
       </LineChart>
     </ResponsiveContainer>
   );

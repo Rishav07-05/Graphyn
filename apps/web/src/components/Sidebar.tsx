@@ -17,41 +17,41 @@ const navItems = [
 export const Sidebar = () => {
   return (
     <aside
-      className="sticky top-0 h-screen w-60 flex-shrink-0 px-4 py-6 flex flex-col transition-colors duration-300"
-      style={{ backgroundColor: 'var(--bg-sidebar)', borderRight: '1px solid var(--border)' }}
+      className="sticky top-0 h-screen w-56 flex-shrink-0 px-5 py-8 flex flex-col transition-colors duration-300"
+      style={{ backgroundColor: 'var(--bg-base)', borderRight: '1px solid var(--border)' }}
     >
-      <div className="flex items-center gap-2.5 px-3 mb-8">
-        <div className="h-8 w-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, var(--accent), var(--accent-secondary))' }}>
-          <span className="text-sm font-black" style={{ color: 'var(--bg-base)' }}>G</span>
+      <div className="flex items-center gap-3 px-2 mb-10">
+        <div className="h-6 w-6 rounded flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--accent)' }}>
+          <span className="text-xs font-black text-black">G</span>
         </div>
-        <span className="text-base font-bold tracking-tight" style={{ color: 'var(--accent)' }}>Graphyn</span>
+        <span className="text-sm font-bold tracking-widest uppercase font-mono" style={{ color: 'var(--text-heading)' }}>Graphyn</span>
       </div>
 
-      <nav className="flex-1 space-y-1">
+      <nav className="flex-1 space-y-1.5">
         {navItems.map((item) => (
           <NavLink
             key={item.label}
             to={item.to}
             className={({ isActive }) =>
-              `group flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-all duration-200`
+              `group flex items-center justify-between rounded-md px-3 py-2 text-[12px] font-medium tracking-wide transition-all duration-200`
             }
             style={({ isActive }) => isActive ? {
-              backgroundColor: 'var(--accent-bg-hover)',
+              backgroundColor: 'rgba(255, 107, 53, 0.05)',
               color: 'var(--accent)',
-              boxShadow: 'inset 0 0 0 1px var(--accent-border)',
             } : {
               color: 'var(--text-muted)',
             }}
           >
             <span>{item.label}</span>
+            <span className="h-1.5 w-1.5 rounded-full scale-0 group-hover:scale-100 transition-transform duration-200" style={{ backgroundColor: 'var(--accent)' }} />
           </NavLink>
         ))}
       </nav>
 
-      <div className="mt-auto pt-4 px-3" style={{ borderTop: '1px solid var(--border)' }}>
+      <div className="mt-auto pt-6 px-2" style={{ borderTop: '1px solid var(--border)' }}>
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: 'var(--pulse-dot)' }} />
-          <span className="text-[10px] uppercase tracking-[0.15em] font-mono" style={{ color: 'var(--text-faint)' }}>System Operational</span>
+          <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: 'var(--pulse-dot)' }} />
+          <span className="text-[9px] uppercase tracking-[0.2em] font-mono" style={{ color: 'var(--text-muted)' }}>sys active</span>
         </div>
       </div>
     </aside>

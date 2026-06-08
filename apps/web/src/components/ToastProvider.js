@@ -14,10 +14,10 @@ export const ToastProvider = ({ children }) => {
     }, []);
     const value = useMemo(() => ({ addToast }), [addToast]);
     return (_jsxs(ToastContext.Provider, { value: value, children: [children, _jsx("div", { className: "pointer-events-none fixed right-6 top-6 z-50 space-y-3", children: toasts.map((toast) => (_jsx("div", { className: `pointer-events-auto rounded-xl border px-4 py-3 text-sm shadow-lg ${toast.type === "success"
-                        ? "border-emerald-200/70 bg-emerald-500/10 text-emerald-700 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200"
+                        ? "border-[var(--badge-success-border)] bg-[var(--badge-success-bg)] text-[var(--badge-success-text)]"
                         : toast.type === "error"
-                            ? "border-red-200/70 bg-red-500/10 text-red-700 dark:border-red-400/30 dark:bg-red-400/10 dark:text-red-200"
-                            : "border-slate-200/70 bg-white/90 text-slate-700 dark:border-white/10 dark:bg-slate-950/80 dark:text-slate-200"}`, children: toast.message }, toast.id))) })] }));
+                            ? "border-[var(--badge-error-border)] bg-[var(--badge-error-bg)] text-[var(--badge-error-text)]"
+                            : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-body)]"}`, children: toast.message }, toast.id))) })] }));
 };
 export const useToast = () => {
     const context = useContext(ToastContext);

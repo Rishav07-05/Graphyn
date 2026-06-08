@@ -11,13 +11,16 @@ export const ErrorRateChart = ({ data }: ErrorRateChartProps) => {
     errors: point.errorCount
   }));
 
+  const root = typeof document !== 'undefined' ? getComputedStyle(document.documentElement) : null;
+  const strokeColor = root?.getPropertyValue('--accent').trim() || '#FF6B35';
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={chartData}>
         <XAxis dataKey="time" hide />
         <YAxis hide />
         <Tooltip />
-        <Line type="monotone" dataKey="errors" stroke="#f97316" strokeWidth={2} dot={false} />
+        <Line type="monotone" dataKey="errors" stroke={strokeColor} strokeWidth={2} dot={false} />
       </LineChart>
     </ResponsiveContainer>
   );
