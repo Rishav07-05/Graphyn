@@ -44,9 +44,9 @@ Socket.io broadcasts on the same base URL:
 - services:update -> updated service metrics
 - metrics:update -> latest analytics snapshot
 - alerts:new -> newly generated alerts
-- socket:stats -> active socket connections
+- socket:stats -> active socket connections~
 - trace:replay -> replayed spans from a trace
-
+~
 ## Data Model (MongoDB)
 
 - Trace: traceId, rootSpanId, spans[]
